@@ -11,7 +11,7 @@ body {
 }
 
 h1, h2 {
-    color: #333;
+    color: #ffffff;
 }
 
 form {
@@ -52,4 +52,28 @@ a {
 
 a:hover {
     text-decoration: underline;
+}
+
+/* Fondo para la página de reservas */
+.car-background {
+    background-image: url('/imagenes/Fondo_3.jpg'); /* Ruta hacia la imagen */
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+}
+
+/* Fondo para la página de login */
+.login-background {
+    background-image: url('/imagenes/fondo2.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Fondo para la página de registro */
+.register-background {
+    background-image: url('/imagenes/fondo_1.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }

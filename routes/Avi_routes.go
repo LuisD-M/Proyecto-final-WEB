@@ -12,7 +12,7 @@ import (
 	"github.com/gorilla/sessions"
 )
 
-func RegisterRoutes(r *mux.Router, store *sessions.CookieStore) {
+func RegisterAviRoutes(r *mux.Router, store *sessions.CookieStore) {
 	r.HandleFunc("/cars", getAllAvi).Methods("GET")
 }
 

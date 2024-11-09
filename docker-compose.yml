@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 0000  
+      POSTGRES_DB: Aviones          #base de datps
+    ports:
+      - "5432:5432"  
+    volumes:
+      - ./Aviones.sql:/docker-entrypoint-initdb.d/Aviones.sql  # Cargar el archivo de aviones

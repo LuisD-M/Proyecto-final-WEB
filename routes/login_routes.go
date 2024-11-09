@@ -1,3 +1,5 @@
+package routes
+
 import (
 	"Proyecto_Final/models"
 	"Proyecto_Final/repository"

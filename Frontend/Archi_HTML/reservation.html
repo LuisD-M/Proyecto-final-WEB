@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservations</title>
+    <link rel="stylesheet" href="../Archi_CSS/styles.css">
+</head>
+<body class="car-background">
+    <form action="/logout" method="POST">
+    <button type="submit" >Cerrar sesion</button>
+    </form>
+    <h1>Your Reservations</h1>
+    <div id="reservationsList"></div>
+    <h2>Make a New Reservation</h2>
+    <form id="searchForm">
+        <label for="criteria">Search Criteria:</label>
+        <input type="text" id="criteria" name="criteria">
+        <button type="submit">Search</button>
+    </form>
+    <div id="carsList"></div>
+    <script>document.getElementById('searchForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const criteria = document.getElementById('criteria').value;
+        const response = await fetch(`/cars?criteria=${criteria}`);
+
+        const cars = await response.json();
+    
+        const carsList = document.getElementById('carsList');
+        carsList.innerHTML = '';
+        cars.forEach(car => {
+            const carDiv = document.createElement('div');
+            carDiv.innerHTML = `
+                <h3 align="center">${car.name}</h3>
+                <img src="${car.img}">
+                <p align="center">Precio: ${car.price}</p>
+                <p align= "center">${car.materiales} - ${car.color}</p>
+                <p align= "center">${car.descripcion}</p>
+                <button style="position: relative; left:275px" onclick="reserveCar(${car.id}, '${car.img}')">Reserve</button>
+            `;
+            carsList.appendChild(carDiv);
+        });
+    });
+
+    
+    async function reserveCar(carID,carImage) {
+    const response = await fetch('/reservations.html', {
+        method: 'POST',
+        credentials: 'include', // Incluye cookies de sesión en la solicitud
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ car_id: carID, extras: 'none', total_price: 100, Imagen: carImage})
+    });
+
+    if (response.ok) {
+        alert('Car reserved successfully');
+        window.location.reload();
+    } else {
+        alert('Reservation failed');
+    }
+}
+
+
+async function loadReservations() {
+    const response = await fetch('/reservations/me', {
+        credentials: 'include' // Incluye cookies de sesión en la solicitud
+    });
+
+    if (response.ok) {
+        const reservations = await response.json();
+        const reservationsList = document.getElementById('reservationsList');
+        reservationsList.innerHTML = '';
+        reservations.forEach(reservation => {
+            const reservationDiv = document.createElement('div');
+            reservationDiv.innerHTML = `
+                <h3>Reservation for car ID ${reservation.id}</h3>
+                 <img src="${reservation.Imagen}">
+                <p>Extras: ${reservation.extrass}</p>
+                <p>Total Price: ${reservation.total_price}</p>
+            `;
+            reservationsList.appendChild(reservationDiv);
+        });
+    } else {
+        alert('Failed to load reservations');
+    }
+}
+
+loadReservations();
+    </script>
+
+</body>
+</html>

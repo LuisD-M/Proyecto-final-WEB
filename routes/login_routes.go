@@ -1,7 +1,7 @@
 import (
 	"Proyecto_Final/models"
 	"Proyecto_Final/repository"
-	// aqui  importar servi "Avi/services"
+	"Proyecto_Final/services"
 	
 	"encoding/json"
 	"fmt"
@@ -72,9 +72,20 @@ func log(w http.ResponseWriter, r *http.Request, store *sessions.CookieStore) {
 	session.Values["username"] = storedUser.Username
 
 	// Guardar la sesión y manejar posibles errores
-	if err := session.Save(r, w); err != nil {
+	if err := session.Save(r, w); err != nil {          
 		http.Error(w, "Could not save session", http.StatusInternalServerError)
 		return
 	}
+
+	// Generar y enviar el token después de guardar la sesión
+	token, err := services.GenerateJWT(storedUser)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	json.NewEncoder(w).Encode(map[string]string{"token": token})
+
+	// Impresión de valores para depuración
+	fmt.Println(session.Values["userID"])
 
 }

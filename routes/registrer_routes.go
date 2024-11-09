@@ -3,7 +3,7 @@ package routes
 import (
 	"Proyecto_Final/models"
 	"Proyecto_Final/repository"
-	
+	"Proyecto_Final/services"
 
 	"encoding/json"
 	"fmt"
@@ -31,7 +31,7 @@ func Registrando(w http.ResponseWriter, r *http.Request) {
 
 	var user models.User
 	json.NewDecoder(r.Body).Decode(&user)
-	//contraseña
+	hashedPassword, err := services.HashPassword(user.Password)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return

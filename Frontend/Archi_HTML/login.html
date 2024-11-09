@@ -3,19 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ingresar</title>
-    <link rel="stylesheet" href="/Frontend/Archi_CSS/styles.css">
-    
+    <title>Login</title>
+    <link rel="stylesheet" href="../Archi_CSS/styles.css">
 </head>
-<body class="login-background">
-    <h1>Ingresar</h1>
+<body class="car-background">
+    <h1>Login</h1>
     <form id="loginForm">
-        <label for="username">Usuario:</label>
+        <label for="username">Username:</label>
         <input type="text" id="username" name="username" required>
-        <label for="password">Contraseña:</label>
+        <label for="password">Password:</label>
         <input type="password" id="password" name="password" required>
         <button type="submit">Login</button>
     </form>
-
+    <script> document.getElementById('loginForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+    
+        const response = await fetch('/login.html', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, password })
+        });
+    
+        if (response.ok) {
+            const data = await response.json();
+            localStorage.setItem('token', data.token);
+            window.location.href = 'reservations.html';
+        } else {
+            alert('Login failed');
+        }
+    });</script>
 </body>
 </html>

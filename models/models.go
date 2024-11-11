@@ -13,7 +13,7 @@ func SetupDB() *sql.DB {
 	if err != nil {
 		panic(err)
 	}
-
+	
 	// Verificar si la conexión a la base de datos es exitosa
 	err = db.Ping()
 	if err != nil {

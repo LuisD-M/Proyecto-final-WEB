@@ -1,6 +1,6 @@
 package models
 
-type Avi struct {
+type Car struct {
 	ID          int    `json:"id"`
 	Categori    string `json:"categori"`
 	Nombre      string `json:"name"`

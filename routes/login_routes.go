@@ -4,7 +4,6 @@ import (
 	"Proyecto_Final/models"
 	"Proyecto_Final/repository"
 	"Proyecto_Final/services"
-	
 	"encoding/json"
 	"fmt"
 	"html/template"
@@ -74,7 +73,7 @@ func log(w http.ResponseWriter, r *http.Request, store *sessions.CookieStore) {
 	session.Values["username"] = storedUser.Username
 
 	// Guardar la sesión y manejar posibles errores
-	if err := session.Save(r, w); err != nil {          
+	if err := session.Save(r, w); err != nil {
 		http.Error(w, "Could not save session", http.StatusInternalServerError)
 		return
 	}
@@ -89,5 +88,4 @@ func log(w http.ResponseWriter, r *http.Request, store *sessions.CookieStore) {
 
 	// Impresión de valores para depuración
 	fmt.Println(session.Values["userID"])
-
 }

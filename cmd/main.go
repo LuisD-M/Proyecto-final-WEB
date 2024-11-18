@@ -1,11 +1,11 @@
 package main
 
 import (
-	"Proyecto_Final/routes"
+	"Avi/routes"
 	"log"
 	"net/http"
 
-	"Proyecto_Final/models"
+	"Avi/models"
 
 	"github.com/gorilla/mux"
 	"github.com/gorilla/sessions"
@@ -37,9 +37,11 @@ func main() {
 	routes.Login(r, store)
 	routes.Register(r, store)
 	routes.RegisterReservationRoutes(r, store)
-	routes.RegisterAviRoutes(r, store)
+	routes.RegisterCarRoutes(r, store)
 	routes.RegisterLogoutRoute(r, store)
-
+	// routes.RegisterCarRoutes(r)
+	// routes.RegisterReservationRoutes(r)
+	// routes.RegisterUserRoutes(r)
 	http.Handle("/", r)
 	log.Fatal(http.ListenAndServe(":8080", r))
 }

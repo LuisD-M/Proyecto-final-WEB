@@ -11,7 +11,7 @@ body {
 }
 
 h1, h2 {
-    color: #ffffff;
+    color: #333;
 }
 
 form {
@@ -52,6 +52,11 @@ a {
 
 a:hover {
     text-decoration: underline;
+}
+
+.car-background {
+    background-size: cover;
+    background-position: center;
 }
 
 /* Fondo para la página de reservas */

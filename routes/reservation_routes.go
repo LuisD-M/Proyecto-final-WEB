@@ -3,7 +3,6 @@ package routes
 import (
 	"Proyecto_Final/models"
 	"Proyecto_Final/repository"
-	
 	"encoding/json"
 	"fmt"
 	"html/template"
@@ -15,7 +14,7 @@ import (
 
 func RegisterReservationRoutes(r *mux.Router, store *sessions.CookieStore) {
 	r.HandleFunc("/reservations.html", reservationPage).Methods("GET")
-	
+	// Envolver createReservation para que reciba el store
 	r.HandleFunc("/reservations.html", func(w http.ResponseWriter, r *http.Request) {
 		createReservation(w, r, store)
 	}).Methods("POST")
@@ -47,7 +46,7 @@ func createReservation(w http.ResponseWriter, r *http.Request, store *sessions.C
 	db := models.SetupDB()
 	defer db.Close()
 	fmt.Print(userID)
-	fmt.Print(reservation.AviID)
+	fmt.Print(reservation.CarID)
 	err = repository.CreateReservation(db, reservation, userID)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -81,12 +80,13 @@ func getUserReservations(w http.ResponseWriter, r *http.Request, store *sessions
 	// Obtener reservas por ID de usuario
 	reservations, err := repository.GetReservationsByUserID(db, userID)
 	if err != nil {
-		fmt.Println("Error retrieving reservations:", err) 
+		fmt.Println("Error retrieving reservations:", err) // Impresión de error
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 	fmt.Print(reservations)
-	
+	// Enviar la respuesta JSON
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(reservations)
 }
+

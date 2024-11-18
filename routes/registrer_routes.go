@@ -4,7 +4,6 @@ import (
 	"Proyecto_Final/models"
 	"Proyecto_Final/repository"
 	"Proyecto_Final/services"
-
 	"encoding/json"
 	"fmt"
 	"html/template"
@@ -47,3 +46,4 @@ func Registrando(w http.ResponseWriter, r *http.Request) {
 	}
 	fmt.Print("cargado con exito")
 }
+

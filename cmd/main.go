@@ -1,11 +1,11 @@
 package main
 
 import (
-	"Avi/routes"
+	"Proyecto_Final/routes"
 	"log"
 	"net/http"
 
-	"Avi/models"
+	"Proyecto_Final/models"
 
 	"github.com/gorilla/mux"
 	"github.com/gorilla/sessions"
@@ -30,8 +30,11 @@ func main() {
 	defer db.Close()
 	r := mux.NewRouter()
 
-	fs := http.FileServer(http.Dir("./static"))                        // Ajusta la ruta a "./static"
-	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", fs)) // Usar r.PathPrefix para manejar archivos estáticos
+	fs := http.FileServer(http.Dir("./static"))                        
+	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", fs)) 
+
+	fsImages := http.FileServer(http.Dir("./imagenes"))
+	r.PathPrefix("/imagenes/").Handler(http.StripPrefix("/imagenes/", fsImages))
 
 	routes.Main(r, store)
 	routes.Login(r, store)
@@ -39,9 +42,9 @@ func main() {
 	routes.RegisterReservationRoutes(r, store)
 	routes.RegisterCarRoutes(r, store)
 	routes.RegisterLogoutRoute(r, store)
-	// routes.RegisterCarRoutes(r)
-	// routes.RegisterReservationRoutes(r)
-	// routes.RegisterUserRoutes(r)
+
 	http.Handle("/", r)
 	log.Fatal(http.ListenAndServe(":8080", r))
+
+
 }

@@ -61,7 +61,7 @@ a:hover {
 
 /* Fondo para la página de reservas */
 .car-background {
-    background-image: url('/imagenes/Fondo_3.jpg'); /* Ruta hacia la imagen */
+    /*background-image: url('../../imagenes/Fondo_3.jpg');   */  
     background-size: cover; 
     background-position: center; 
     background-repeat: no-repeat; 
@@ -69,7 +69,7 @@ a:hover {
 
 /* Fondo para la página de login */
 .login-background {
-    background-image: url('/imagenes/fondo2.jpg');
+    background-image: url('../../imagenes/fondo2.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -77,8 +77,15 @@ a:hover {
 
 /* Fondo para la página de registro */
 .register-background {
-    background-image: url('/imagenes/fondo_1.jpg');
+    background-image: url('../../imagenes/fondo_1.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+}
+
+.main-background {
+    background-image: url('../../imagenes/Fondo_3.jpg');    
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
 }

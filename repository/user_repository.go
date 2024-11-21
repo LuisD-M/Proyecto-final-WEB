@@ -3,7 +3,7 @@ package repository
 import (
 	"database/sql"
 
-	"Avi/models"
+	"Proyecto_Final/models"
 )
 
 func CreateUser(db *sql.DB, user models.User) error {

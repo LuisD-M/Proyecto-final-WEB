@@ -14,11 +14,11 @@ import (
 
 func RegisterReservationRoutes(r *mux.Router, store *sessions.CookieStore) {
 	r.HandleFunc("/reservations.html", reservationPage).Methods("GET")
-	// Envolver createReservation para que reciba el store
+	
 	r.HandleFunc("/reservations.html", func(w http.ResponseWriter, r *http.Request) {
 		createReservation(w, r, store)
 	}).Methods("POST")
-	// Ruta para obtener reservas de un usuario específico
+	
 	r.HandleFunc("/reservations/me", func(w http.ResponseWriter, r *http.Request) { getUserReservations(w, r, store) }).Methods("GET")
 }
 func reservationPage(w http.ResponseWriter, r *http.Request) {
@@ -58,26 +58,26 @@ func createReservation(w http.ResponseWriter, r *http.Request, store *sessions.C
 }
 
 func getUserReservations(w http.ResponseWriter, r *http.Request, store *sessions.CookieStore) {
-	// Obtener la sesión
+	
 	session, err := store.Get(r, "session-name")
 	if err != nil {
-		fmt.Println("Error getting session:", err) // Impresión de error
+		fmt.Println("Error getting session:", err) 
 		http.Error(w, "Could not get session", http.StatusInternalServerError)
 		return
 	}
 
-	// Obtener el ID de usuario de la sesión
+	
 	userID, ok := session.Values["userID"].(int)
 	if !ok {
 		http.Error(w, "User not logged in", http.StatusUnauthorized)
 		return
 	}
 
-	// Conectar a la base de datos
+	
 	db := models.SetupDB()
 	defer db.Close()
 
-	// Obtener reservas por ID de usuario
+	
 	reservations, err := repository.GetReservationsByUserID(db, userID)
 	if err != nil {
 		fmt.Println("Error retrieving reservations:", err) // Impresión de error
@@ -85,7 +85,7 @@ func getUserReservations(w http.ResponseWriter, r *http.Request, store *sessions
 		return
 	}
 	fmt.Print(reservations)
-	// Enviar la respuesta JSON
+	
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(reservations)
 }

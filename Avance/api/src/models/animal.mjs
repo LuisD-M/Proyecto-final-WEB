@@ -5,7 +5,7 @@ class Animal {
     this.id = id;
     this.name = name;
     this.species = species;
-    this.dueno = dueno;  // Relación con la clase Dueño
+    this.dueno = dueno;  
   }
 
   setDueño(dueno) {
@@ -13,7 +13,7 @@ class Animal {
       throw new Error("Debe ser un objeto de la clase Dueño");
     }
     this.dueno = dueno;
-    dueño.addAnimal(this);
+    dueno.addAnimal(this);
   }
 
   static fromObject(obj) {

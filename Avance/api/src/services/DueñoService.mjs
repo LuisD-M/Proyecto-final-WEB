@@ -20,7 +20,7 @@ class DuenoService {
     try {
       const { name, lastname, phone } = dueno; 
       await new Db().query(
-        "INSERT INTO dueño (name, lastname, phone) VALUES ($1, $2, $3)", 
+        "INSERT INTO dueno (name, lastname, phone) VALUES ($1, $2, $3)", 
         [name, lastname, phone]
       );
       return "Dueño creado con éxito";
@@ -34,7 +34,7 @@ class DuenoService {
     try {
       const { name, lastname, phone } = dueno;
       await new Db().query(
-        "UPDATE dueño SET name = $1, lastname = $2, phone = $3 WHERE id = $4", 
+        "UPDATE dueno SET name = $1, lastname = $2, phone = $3 WHERE id = $4", 
         [name, lastname, phone, id]
       );
       return "Dueño actualizado con éxito";
@@ -46,7 +46,7 @@ class DuenoService {
 
   delete = async (id) => {
     try {
-      await new Db().query("DELETE FROM dueño WHERE id = $1", [id]);
+      await new Db().query("DELETE FROM dueno WHERE id = $1", [id]);
       return "Dueño eliminado con éxito";
     } catch (error) {
       console.error("Error al eliminar dueño", error);

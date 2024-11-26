@@ -1,4 +1,5 @@
-BEGIN transaction;
+
+BEGIN;
 
 INSERT INTO dueno (name, lastname, phone) VALUES
 ('Juan', 'Pérez', '123456789'),
@@ -7,7 +8,7 @@ INSERT INTO dueno (name, lastname, phone) VALUES
 ('Laura', 'Sánchez', '777888999'),
 ('José', 'Torres', '444555666');
 
-INSERT INTO animal (name, species, dueño_id) VALUES
+INSERT INTO animal (name, species, dueno_id) VALUES
 ('Rex', 'Perro', 1),
 ('Tommy', 'Gato', 2),
 ('Bobby', 'Caballo', 3),
@@ -28,4 +29,4 @@ INSERT INTO comprador (name, lastname, phone, company) VALUES
 ('Sofía', 'Hernández', '6677889900', 'Alimentos S.A.'),
 ('Roberto', 'Ruiz', '7788990011', 'Productos del Campo');
 
-COMMIT transaction;
+COMMIT;

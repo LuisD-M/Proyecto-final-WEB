@@ -1,7 +1,7 @@
 --\c app;
 
-BEGIN transaction;
-\c app;
+BEGIN;
+
 CREATE TABLE
     dueno (
         id SERIAL PRIMARY KEY,
@@ -15,7 +15,7 @@ CREATE TABLE
         id SERIAL PRIMARY KEY,
         name TEXT NOT NULL,
         species TEXT NOT NULL,
-        dueño_id INT REFERENCES dueno (id) ON DELETE SET NULL
+        dueno_id INT REFERENCES dueno (id) ON DELETE SET NULL
     );
 
 CREATE TABLE
@@ -36,4 +36,4 @@ CREATE TABLE
         company TEXT
     );
 
-COMMIT transaction;
+COMMIT;

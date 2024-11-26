@@ -8,7 +8,7 @@ class AnimalService {
       const resultados = await new Db().query("SELECT * FROM animal");
       return resultados.rows.map(
         ({ id, name, species, dueno_id }) =>
-          new Animal(id, name, species, dueno_id)  // Asociamos el dueño_id al animal
+          new Animal(id, name, species, dueno_id)  
       );
     } catch (error) {
       console.error("Error al listar animales", error);
@@ -22,7 +22,7 @@ class AnimalService {
       const { name, species, dueno_id } = animal;
 
       await new Db().query(
-        "INSERT INTO animal (name, species, dueño_id) VALUES ($1, $2, $3)",
+        "INSERT INTO animal (name, species, dueno_id) VALUES ($1, $2, $3)",
         [name, species, dueno_id]
       );
       return "Animal creado con éxito";
@@ -38,7 +38,7 @@ class AnimalService {
       const { name, species, dueno_id } = animal;
 
       await new Db().query(
-        "UPDATE animal SET name = $1, species = $2, dueño_id = $3 WHERE id = $4",
+        "UPDATE animal SET name = $1, species = $2, dueno_id = $3 WHERE id = $4",
         [name, species, dueno_id, id]
       );
       return "Animal actualizado con éxito";

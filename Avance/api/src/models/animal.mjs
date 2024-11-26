@@ -5,7 +5,7 @@ class Animal {
     this.id = id;
     this.name = name;
     this.species = species;
-    this.dueño = dueño;
+    this.dueño = dueño;  // Relación con la clase Dueño
   }
 
   setDueño(dueño) {
@@ -17,8 +17,8 @@ class Animal {
   }
 
   static fromObject(obj) {
-    const { id, name, species, dueño } = obj;
-    return new Animal(id, name, species, dueño);
+    const { id, name, species, dueño_id } = obj;
+    return new Animal(id, name, species, dueño_id);
   }
 }
 

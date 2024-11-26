@@ -1,15 +1,15 @@
 import { validationResult, matchedData } from "express-validator";
-import DueñoService from "../services/DueñoService.mjs";
+import {DuenoService} from "../services/DueñoService.mjs";
 
-class DueñoController {
-  #dueñoService;
+class DuenoController {
+  #duenoService;
 
   constructor() {
-    this.#dueñoService = new DueñoService();
+    this.#duenoService = new DuenoService();
   }
 
-  createDueño = async (req, res) => {
-    // Validación de los datos de entrada
+  createDueno = async (req, res) => {
+    
     const validated = validationResult(req);
     if (!validated.isEmpty()) {
       return res.status(400).send({ errors: validated.array() });
@@ -17,7 +17,7 @@ class DueñoController {
 
     const { name, lastname, phone } = matchedData(req);
     try {
-      const message = await this.#dueñoService.create({ name, lastname, phone });
+      const message = await this.#duenoService.create({ name, lastname, phone });
       res.status(201).send({ message });
     } catch (error) {
       if (error instanceof CustomError) {
@@ -27,10 +27,10 @@ class DueñoController {
     }
   };
 
-  updateDueño = async (req, res) => {
+  updateDueno = async (req, res) => {
     const { id } = req.params;
 
-    // Validación de los datos de entrada
+    
     const validated = validationResult(req);
     if (!validated.isEmpty()) {
       return res.status(400).send({ errors: validated.array() });
@@ -38,23 +38,23 @@ class DueñoController {
 
     const { name, lastname, phone } = matchedData(req);
     try {
-      const result = await this.#dueñoService.update(id, { name, lastname, phone });
+      const result = await this.#duenoService.update(id, { name, lastname, phone });
       res.status(200).send({ message: result });
     } catch (error) {
       res.status(500).send({ message: "Error al actualizar el dueño" });
     }
   };
 
-  getDueños = async (req, res) => {
+  getDuenos = async (req, res) => {
     try {
-      const dueños = await this.#dueñoService.getAll();
+      const dueños = await this.#duenoService.getAll();
       res.status(200).send(dueños);
     } catch (error) {
       res.status(500).send({ message: "Error al obtener dueños" });
     }
   };
 
-  deleteDueño = async (req, res) => {
+  deleteDueno = async (req, res) => {
     const { id } = req.params;
 
     if (!id) {
@@ -62,7 +62,7 @@ class DueñoController {
     }
 
     try {
-      const result = await this.#dueñoService.delete(id);
+      const result = await this.#duenoService.delete(id);
       res.status(200).send({ message: result });
     } catch (error) {
       res.status(500).send({ message: "Error al eliminar el dueño" });
@@ -70,4 +70,4 @@ class DueñoController {
   };
 }
 
-export { DueñoController };
+export { DuenoController };

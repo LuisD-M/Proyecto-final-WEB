@@ -1,6 +1,6 @@
 import { Animal } from "./animal.mjs";
 
-class Dueño {
+class Dueno {
   constructor(id = null, name, lastname, phone = null) {
     this.id = id;
     this.name = name;
@@ -19,8 +19,8 @@ class Dueño {
 
   static fromObject(obj) {
     const { id, name, lastname, phone } = obj;
-    return new Dueño(id, name, lastname, phone);
+    return new Dueno(id, name, lastname, phone);
   }
 }
 
-export { Dueño };
+export { Dueno };

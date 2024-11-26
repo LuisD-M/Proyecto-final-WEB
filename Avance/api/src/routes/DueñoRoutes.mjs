@@ -1,29 +1,29 @@
 import { Router } from 'express';
 import { body } from 'express-validator';
-import { DueñoController } from '../controllers/DueñoController.mjs';
+import { DuenoController } from '../controllers/DueñoController.mjs';
 
-class DueñoRoutes {
+class DuenoRoutes {
     constructor() {
         this.router = Router();
-        this.controller = new DueñoController();
+        this.controller = new DuenoController();
 
         this.router
             .route('/')
-            .get(this.controller.getDueños)
+            .get(this.controller.getDuenos)
             .post(
                 [
                     body('name').trim().notEmpty(),
                     body('lastname').trim().notEmpty(),
                     body('phone').trim().optional().isNumeric(),
                 ],
-                this.controller.createDueño
+                this.controller.createDueno
             );
 
         this.router
             .route('/:id')
-            .put(this.controller.updateDueño)
-            .delete(this.controller.deleteDueño);
+            .put(this.controller.updateDueno)
+            .delete(this.controller.deleteDueno);
     }
 }
 
-export { DueñoRoutes };
+export { DuenoRoutes };

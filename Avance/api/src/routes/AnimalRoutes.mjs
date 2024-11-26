@@ -17,7 +17,7 @@ class AnimalRoutes {
                   body("name").trim().notEmpty(),
                   body("species").trim().isNumeric(),
                 ],
-                this.controller.createCourse
+                this.controller.createAnimal
               );
 
         this.router

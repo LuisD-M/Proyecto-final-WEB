@@ -1,14 +1,14 @@
 import { Db } from "../config/db.mjs";
-import { Dueño } from "../models/dueño.mjs";
+import { Dueno } from "../models/dueño.mjs";
 import { CustomError } from "../utils/CustomError.mjs";
 
-class DueñoService {
+class DuenoService {
   getAll = async () => {
     try {
-      const resultados = await new Db().query("SELECT * FROM dueño");
+      const resultados = await new Db().query("SELECT * FROM dueno");
       return resultados.rows.map(
         ({ id, name, lastname, phone }) =>
-          new Dueño(id, name, lastname, phone) 
+          new Dueno(id, name, lastname, phone) 
       );
     } catch (error) {
       console.error("Error al listar dueños", error);
@@ -16,9 +16,9 @@ class DueñoService {
     }
   };
 
-  create = async (dueño) => {
+  create = async (dueno) => {
     try {
-      const { name, lastname, phone } = dueño; 
+      const { name, lastname, phone } = dueno; 
       await new Db().query(
         "INSERT INTO dueño (name, lastname, phone) VALUES ($1, $2, $3)", 
         [name, lastname, phone]
@@ -30,9 +30,9 @@ class DueñoService {
     }
   };
 
-  update = async (id, dueño) => {
+  update = async (id, dueno) => {
     try {
-      const { name, lastname, phone } = dueño;
+      const { name, lastname, phone } = dueno;
       await new Db().query(
         "UPDATE dueño SET name = $1, lastname = $2, phone = $3 WHERE id = $4", 
         [name, lastname, phone, id]
@@ -55,4 +55,4 @@ class DueñoService {
   };
 }
 
-export {DueñoService};
+export {DuenoService};
